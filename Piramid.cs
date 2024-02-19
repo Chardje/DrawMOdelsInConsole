@@ -7,7 +7,7 @@
             get;
             init;
         }
-        public List<Ray> edges
+        public List<Edge> edges
         {
             get;
             init;
@@ -42,6 +42,14 @@
             points = new List<Vector>();
             points.AddRange(Base.Points);
             points.Add(Base.Centr() + (height* Base.Normal()));
+
+            edges = new List<Edge>();
+            for (int i = 0; i < points.Count-1; i++)
+            {
+                edges.Add(new Edge(points[i], points[i+1],'='));
+                edges.Add(new Edge(points[i], points.Last(), '1'));
+            }
+            edges.Add(new Edge(points[0], points[points.Count-2], '='));
 
         }
         ~Piramid()
