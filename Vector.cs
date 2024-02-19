@@ -5,6 +5,8 @@ namespace OOPLab2
 {
     public class Vector : ICloneable
     {
+        public static readonly Vector Zero = new Vector(0, 0, 0);
+
         public double[] cords;
         public double X { get => cords[0]; set => cords[0] = value; }
         public double Y { get => cords[1]; set => cords[1] = value; }

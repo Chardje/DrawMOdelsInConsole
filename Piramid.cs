@@ -41,7 +41,7 @@
 
             points = new List<Vector>();
             points.AddRange(Base.Points);
-            points.Add(Base.Centr() + (height* Base.Normal()));
+            points.Add(Base.Center + (height* Base.Normal()));
 
             edges = new List<Edge>();
             for (int i = 0; i < points.Count-1; i++)

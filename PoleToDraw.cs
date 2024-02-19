@@ -16,7 +16,7 @@ namespace OOPLab2
 
         void PutPoint(int x, int y, char color)
         {
-            if (x < 0 || x > w || y < 0 || y > h) return;
+            if (x < 0 || x >= w || y < 0 || y >= h) return;
             _data[x, y] = color;
         }
 
@@ -25,7 +25,7 @@ namespace OOPLab2
             _data = new char[w, h];
             this.h = h;
             this.w = w;
-            cam = Matrix.OrtoganalMatrix( w / 40, -w / 40, h / 10, -h / 30, 20, -20)* Matrix.RotateX(1.5);
+            cam = Matrix.OrtoganalMatrix( 1.5, -1.5, 3, 0, 2, -2);
         }
 
         public void Draw(Model model)
@@ -91,27 +91,27 @@ namespace OOPLab2
             }
         }
 
-        public void Export()
+        public string Export()
         {
+            string s ="";
             for (int y = 0; y < h; y++)
             {
                 for (int x = 0; x < w; x++)
                 {
                     if (_data[x, y] != 0)
                     {
-                        Console.Write(_data[x, y]);
-
+                        s+=_data[x, y];
                     }
                     else
                     {
-                        Console.Write(" ");
-
+                        s+=" ";
                     }
                 }
-                Console.WriteLine();
+                s+="\n";
             }
+            return s;
         }
-        public void Cear()
+        public void Clear()
         {
             _data=new char[w,h];
         }
