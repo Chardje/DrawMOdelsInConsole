@@ -88,6 +88,7 @@ namespace OOPLab2
         {            
         }
 
+        //зміна полігону матрицею
         public static Poligon operator *(Matrix m, Poligon p)
         {
             List<Vector> Points=new List<Vector>();
@@ -130,9 +131,10 @@ namespace OOPLab2
             radius=R;
             this.Center = Center;
         }
-
+        //конструктор 2
         public RegularShape(double R, int CountPoints) : this(R, CountPoints, Vector.Zero) { }
 
+        //конструктор
         public RegularShape(double R, int CountPoints, Vector center)
         {
             Center=center;

@@ -8,10 +8,15 @@ namespace OOPLab2
 {
     internal class PoleToDraw
     {
+        //поки не використовується повнісю але це на майбутне кольори заповнення малюнку
+        public readonly static char[] simbols = { ' ', '.', ':', '-', '*', '=', '$', '%', '#', '@' };
+
+        //висота ширина
         int h, w;
 
         public Matrix cam;
 
+        //поле у вигляді масив
         private char[,] _data;
 
         void PutPoint(int x, int y, char color)
@@ -19,18 +24,28 @@ namespace OOPLab2
             if (x < 0 || x >= w || y < 0 || y >= h) return;
             _data[x, y] = color;
         }
-
-        public PoleToDraw(int h, int w)
+        //конструктор
+        public PoleToDraw(int w, int h)
         {
             _data = new char[w, h];
             this.h = h;
             this.w = w;
-            cam = Matrix.OrtoganalMatrix( 1.5, -1.5, 3, 0, 2, -2);
+            cam = Matrix.OrtoganalMatrix(1.5, -1.5, 3, 0, 2, -2);
+        }
+
+        public void Draw(Poligon poligon)
+        {
+            for (int i = 0; i < poligon.Points.Count; i++)
+            {
+                DrawLine(new Ray(poligon[i], poligon[i + 1]), '@');
+            }
+            DrawLine(new Ray(poligon[0], poligon[poligon.Points.Count - 1]), '@');
+
         }
 
         public void Draw(Model model)
         {
-            foreach(Edge e in model.edges)
+            foreach (Edge e in model.edges)
             {
                 DrawLine(e, e.color);
             }
@@ -43,7 +58,7 @@ namespace OOPLab2
             v0 = cam * ray[0];
             v1 = cam * ray[1];
 
-            DrawLine((int)v0.X + w / 2, (int)v0.Y/4 + h / 2, (int)v1.X + w / 2, (int)v1.Y/4 + h / 2, color);
+            DrawLine((int)v0.X + w / 2, (int)v0.Y / 4 + h / 2, (int)v1.X + w / 2, (int)v1.Y / 4 + h / 2, color);
         }
 
         public void DrawLine(int x0, int y0, int x1, int y1, char color)
@@ -91,29 +106,32 @@ namespace OOPLab2
             }
         }
 
+        // вивести в консоль масив
         public string Export()
         {
-            string s ="";
+            string s = "";
             for (int y = 0; y < h; y++)
             {
                 for (int x = 0; x < w; x++)
                 {
                     if (_data[x, y] != 0)
                     {
-                        s+=_data[x, y];
+                        s += _data[x, y];
                     }
                     else
                     {
-                        s+=" ";
+                        s += simbols[0];
                     }
                 }
-                s+="\n";
+                s += "\n";
             }
             return s;
         }
+
+        //очистити масив
         public void Clear()
         {
-            _data=new char[w,h];
+            _data = new char[w, h];
         }
     }
 }

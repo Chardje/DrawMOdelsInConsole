@@ -44,12 +44,14 @@
             points.Add(Base.Center + (height* Base.Normal()));
 
             edges = new List<Edge>();
-            for (int i = 0; i < points.Count-1; i++)
+            for (int i = 0; i < points.Count-2; i++)
             {
-                edges.Add(new Edge(points[i], points[i+1],'='));
-                edges.Add(new Edge(points[i], points.Last(), '1'));
+                edges.Add(new Edge(points[i], points[i+1],(char)('=')));
+                edges.Add(new Edge(points[i], points.Last(), (char)('1')));
             }
             edges.Add(new Edge(points[0], points[points.Count-2], '='));
+            edges.Add(new Edge(points[points.Count - 2], points[points.Count - 1], '1'));
+
 
         }
         ~Piramid()

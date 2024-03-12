@@ -191,7 +191,7 @@ namespace OOPLab2
         public static Matrix OrtoganalMatrix(double l, double r, double b, double t, double n, double f)
         {
             double[,] result = new double[4, 4];
-            result[0, 0] = 2 / (r - l);
+            result[0, 0] = 1 / (r - l);//за формулою 2/(r - l) але через співвідношення ширени і віисти літер тепер 1/(r - l)
             result[1, 1] = 2 / (t - b);
             result[2, 1] = -2 / (f - n);
             result[2, 3] = -(r + l) / (r - l);
